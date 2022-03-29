@@ -1,0 +1,41 @@
+body{
+    background-color: #c0c781ff;
+}
+
+#tokenSection{
+    display: none;
+}
+
+#deviceSection{
+    display: none;
+}
+
+.container{
+    padding: 20px;    
+    background-color: #fff;
+}
+
+#albumImage{
+    width: 300px;
+    float: left;
+    margin: 20px;
+
+}
+
+#trackTitle{
+    font-size:3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+#trackArtist{
+    font-size:2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+}
+
+.welcomeText{
+    font-size:2em;
+}
