@@ -2,6 +2,25 @@ body{
   /* background-color: #94a7ae; */
 }
 
+.imagen{
+  display: grid;
+  justify-content: center;
+}
+
+.form-label{
+  background-color: #4e54c8;
+  border-radius: 0.2rem;
+  width: 7%;
+  
+}
+
+h1{
+  background-color: #4e54c8;
+  border-radius: 0.2rem;
+  width: 42%;
+  margin: 0 auto;
+  }
+
 .form-control{
   opacity: .8;
 }
@@ -19,7 +38,7 @@ body{
 }
 
 #albumImage{
-    width: 300px;
+    width: 200px;
     float: left;
     margin: 20px;
 
@@ -64,16 +83,10 @@ body{
     
   }
   .main {
-    height: 100vh;
-    width: 100vw;
-    /* position: absolute; */
-    /* display: block; */
     display: flex;
-     /* Add the blur effect */
-
-
 }
   #d1 {
+    animation-iteration-count: infinite !important;
     position: absolute;
     filter: blur(5px);
     -webkit-filter: blur(5px);
@@ -84,11 +97,13 @@ body{
   
     background-position: 0 50%;
   
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 2;
+    animation: move 10s linear infinite;
     animation: dd1 10s 1, dd12 10s 1;
-    animation-delay: 4s, 14s;
+    animation-delay: 2s, 5s;
+
   }
   #d2 {
     position: absolute;
@@ -101,12 +116,12 @@ body{
   
     background-position: -10vw 50%;
     left: 10vw;
-  
-    top: 50%;
+    animation-iteration-count: infinite !important;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 1;
     animation: dd2 10s 2;
-    animation-delay: 4s;
+    animation-delay: 2s;
   }
   #d3 {
     position: absolute;
@@ -121,18 +136,18 @@ body{
     left: 25vw;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
     background-position: -35vw 50%;
-  
-    top: 50%;
+    animation-iteration-count: infinite !important;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 3;
     animation: dd3 10s 2;
-    animation-delay: 4s;
+    animation-delay: 2s;
   }
   #d4 {
     position: absolute;
     overflow: hidden;
     background-size: 2700px 1500px;
-  
+    animation-iteration-count: infinite !important;
     filter: blur(5px);
     -webkit-filter: blur(5px);
     height: 80vh;
@@ -140,11 +155,11 @@ body{
     left: 60vw;
     background-position: -70vw 50%;
   
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 1;
     animation: dd4 10s 2;
-    animation-delay: 4s;
+    animation-delay: 2s;
   }
   
   @keyframes dd1 {
@@ -216,10 +231,7 @@ body{
 .area{
     background: #4e54c8;  
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
-    width: 100%;
-    height:100vh;
-    
-   
+
 }
 
 .circles{
@@ -227,7 +239,7 @@ body{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 144%;
     overflow: hidden;
 }
 
@@ -235,11 +247,12 @@ body{
     position: absolute;
     display: block;
     list-style: none;
-    width: 20px;
-    height: 20px;
+    width: 2px;
+    height: 2px;
     background: rgba(255, 255, 255, 0.2);
     animation: animate 25s linear infinite;
     bottom: -150px;
+    
     
 }
 
@@ -255,7 +268,7 @@ body{
     left: 10%;
     width: 20px;
     height: 20px;
-    animation-delay: 2s;
+    animation-delay: 4s;
     animation-duration: 12s;
 }
 
