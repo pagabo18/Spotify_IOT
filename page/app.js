@@ -300,11 +300,18 @@ function handleCurrentlyPlayingResponse(){
             document.getElementById("albumImage").src = data.item.album.images[0].url;
             document.getElementById("trackTitle").innerHTML = data.item.name;
             document.getElementById("trackArtist").innerHTML = data.item.artists[0].name;
+            //inssert album image to background
+            document.getElementById("d1").style.backgroundImage = "url(" + data.item.album.images[0].url + ")";
+            document.getElementById("d2").style.backgroundImage = "url(" + data.item.album.images[0].url + ")";
+            document.getElementById("d3").style.backgroundImage = "url(" + data.item.album.images[0].url + ")";
+            document.getElementById("d4").style.backgroundImage = "url(" + data.item.album.images[0].url + ")";
+           
+            
         }
 
 
         if ( data.device != null ){
-            // select device
+            // select device        
             currentDevice = data.device.id;
             document.getElementById('devices').value=currentDevice;
         }
