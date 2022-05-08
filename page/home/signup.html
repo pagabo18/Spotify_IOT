@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>Firebase Iot</title>
+    <link rel="stylesheet" href="singup.css">
+
+</head>
+
+<body>
+
+    <div class="container" onclick="onclick">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="center">
+            <div class="left">
+                <h1>Sign up</h1>
+
+                <input type="text" id="username" name="username" placeholder="UserName" />
+                <input type="text" id="email" name="email" placeholder="E-mail" />
+                <input type="password" id="password" name="password" placeholder="Password" />
+
+                <input type="submit" name="signup_submit" id="sign" value="Sign up" />
+                <a href="/home/login.html"> login</a>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAJxs0A6KjvExaEsm7syFWVNap0vmDElVc",
+      authDomain: "spotify-iot.firebaseapp.com",
+      databaseURL: "https://spotify-iot-default-rtdb.firebaseio.com",
+      projectId: "spotify-iot",
+      storageBucket: "spotify-iot.appspot.com",
+      messagingSenderId: "924978555363",
+      appId: "1:924978555363:web:ab15d58d98faafea8858d6"
+    };
+  
+
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+
+
+
+
+        sign.addEventListener('click', (e) => {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var username = document.getElementById('username').value;
+
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed in
+              const user = userCredential.user;
+              alert("User created successfully");
+
+              set(ref(database, 'users/'+user.uid),{
+                  username: username,
+                  email: email,
+              })
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+
+              alert('Error: ' + errorMessage);
+              // ..
+
+            });
+        });
+  </script>
+
+
+</html>

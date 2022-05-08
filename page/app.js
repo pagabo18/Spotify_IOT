@@ -1,3 +1,5 @@
+
+
 var redirect_uri = "https://makeratplay.github.io/SpotifyWebAPI/"; 
 var redirect_uri = "http://127.0.0.1:5500/page/index.html";
  
@@ -372,3 +374,4 @@ function addRadioButton(item, index){
     node.onclick = function() { onRadioButton( item.deviceId, item.playlistId ) };
     document.getElementById("radioButtons").appendChild(node);
 }
+

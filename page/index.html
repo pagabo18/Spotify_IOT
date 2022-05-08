@@ -18,20 +18,21 @@
             <div class="fronted" style="z-index: 900;
             position: relative;">
                 <div class="container">
-    
+
                     <div id="tokenSection" class="row">
                         <div class="col">
-    
+
                             <p>
                                 <a href="https://developer.spotify.com/dashboard/applications"
                                     target="_blank">https://developer.spotify.com/dashboard/applications</a>
-                                and add https://makeratplay.github.io/SpotifyWebAPI/ in the "Redirect URIs" settings field.
+                                and add https://makeratplay.github.io/SpotifyWebAPI/ in the "Redirect URIs" settings
+                                field.
                             </p>
                             <p>
                                 <ul>
                                     <li>https://accounts.spotify.com/authorize </li>
                                     <li>https://accounts.spotify.com/api/token </li>
-    
+
                                     <li>https://api.spotify.com/v1/me/playlists </li>
                                     <li>https://api.spotify.com/v1/me/player/devices </li>
                                     <li>https://api.spotify.com/v1/me/player/play </li>
@@ -44,9 +45,10 @@
                                     <li>https://api.spotify.com/v1/me/player/shuffle </li>
                                 </ul>
                             </p>
-    
+
                         </div>
                         <div class="col">
+
                             <div class="mb-3">
                                 <label for="clientId" class="form-label">Client ID</label>
                                 <input type="text" class="form-control" id="clientId" placeholder="">
@@ -58,17 +60,18 @@
                             <input class="btn btn-primary btn-lg" type="button" onclick="requestAuthorization()"
                                 value="Request Authorization"><br />
                         </div>
-    
+
                         <div class="col">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/H2HJ-LY7-lQ" frameborder="0"
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/H2HJ-LY7-lQ"
+                                frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
                         </div>
                     </div>
-    
+
                     <div id="deviceSection" class="row">
                         <div class="col">
-    
+
                             <div class="mb-3">
                                 <label for="devices" class="form-label">Devices</label>
                                 <select id="devices" class="form-control">
@@ -78,16 +81,16 @@
                                 <input type="button" class="btn btn-dark btn-sm  mt-3" onclick="transfer()"
                                     value="Transfer">
                             </div>
-    
+
                             <div class="mb-3">
                                 <label for="playlists" class="form-label">Playlists</label>
                                 <select id="playlists" class="form-control">
                                 </select>
                                 <input class="btn btn-primary btn-sm mt-3" type="button" onclick="refreshPlaylists()"
                                     value="Refresh Playlists">
-    
+
                             </div>
-    
+
                             <div class="mb-3">
                                 <label for="tracks" class="form-label">Tracks</label>
                                 <select id="tracks" class="form-control">
@@ -95,36 +98,48 @@
                                 <input class="btn btn-primary btn-sm mt-3" type="button" onclick="fetchTracks()"
                                     value="Fetch Tracks">
                             </div>
-    
+
                             <div class="mb-3">
                                 <label for="tracks" class="form-label">Album</label>
                                 <input id="album" class="form-control">
                             </div>
-    
+
                             <div class="row">
                                 <div class="col">
                                     <input type="button" class="btn btn-dark" onclick="previous()" value="Prev">
-                                    <input type="button" class="btn btn-dark" onclick="play()" value="Play">
+                                    <input type="button" class="btn btn-dark" onclick="play()"
+                                        value="Play">
                                     <input type="button" class="btn btn-dark" onclick="shuffle()" value="Shuffle">
                                     <input type="button" class="btn btn-dark" onclick="pause()" value="Pause">
                                     <input type="button" class="btn btn-dark" onclick="next()" value="Next">
+                                    <input type="submit" name="log_out" id="logout" value="logout"
+                                        class="btn btn-danger" value="logout" onclick="pause()">
+
+                                        <input type="submit" name="playing" id="playing" value="playing"
+                                        class="btn btn-danger" value="Play" onclick="play()">
+
                                 </div>
+
                             </div>
-    
-    
-                            <div class="row  mt-4">
+
+
+                            <div class="row">
                                 <div class="col">
-                                    <h1> Currently Playing</h1>
-                                    <input type="button" class="btn btn-primary btn-sm mt-3" onclick="currentlyPlaying()"
-                                        value="Refresh Currently Playing">
+
+
+                                    <input type="button" class="btn btn-primary btn-sm mt-3"
+                                        onclick="currentlyPlaying()" value="Refresh Currently Playing">
                                     <div class="imagen">
                                         <img id="albumImage" src="">
                                         <div id="trackTitle"></div>
                                         <div id="trackArtist"></div>
                                     </div>
-    
+                                    <br>
+                                    <br><br>
+                                    <br>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -155,5 +170,57 @@
 
 
 </body>
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import { getDatabase, set, ref, update, push, add } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+        import { signOut,getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAJxs0A6KjvExaEsm7syFWVNap0vmDElVc",
+      authDomain: "spotify-iot.firebaseapp.com",
+      databaseURL: "https://spotify-iot-default-rtdb.firebaseio.com",
+      projectId: "spotify-iot",
+      storageBucket: "spotify-iot.appspot.com",
+      messagingSenderId: "924978555363",
+      appId: "1:924978555363:web:ab15d58d98faafea8858d6"
+    };
+  
+
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+
+    playing.addEventListener("click",  (e) =>{
+        
+        
+        add(ref(database,"currentlyPlaying/ " + "song"), {
+            trackTitle: trackTitle.innerHTML,
+            trackArtist: trackArtist.innerHTML,
+            user: auth.currentUser.email,
+        });
+        alert("Track has been sent to the cloud");
+            
+    });
+
+
+    logout.addEventListener('click', (e) => {
+        signOut(auth).then(() => {
+            alert("User logged out successfully");
+            window.location.href = "home/login.html";
+        }).catch((error) => {
+            alert('Error: ' + error.message);
+        });
+    });
+  </script>
 
 </html>
