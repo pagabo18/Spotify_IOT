@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <input type="submit" name="log_out" id="logout" value="logout" />
+    <ul id="list">
+
+    </ul>
 </body>
 <script type="module">
     // Import the functions you need from the SDKs you need
@@ -36,16 +41,53 @@
     const database = getDatabase(app);
     const auth = getAuth(app);
 
+    firebase.initializeApp(firebaseConfig);
 
+    var stdNo = 0;
+
+    function addItemsToList(trackArtist,trackTitle,user) {
+        var ul=document.getElementsByTagName("list")[0];
+        var header = document.createElement("h2");
+
+        var header = document.createElement("li");
+        var header = document.createElement("li");
+        var header = document.createElement("li");
+
+        _trackArtist.innerHTML = 'trackArtist:' +trackArtist;
+        _trackTitle.innerHTML = 'trackTitle:' +trackTitle;
+        _user.innerHTML = 'user:' +user;
+
+        header.innerHTML = 'song-'+(stdNo+1);
+
+        ul.appendChild(header);
+        ul.appendChild(_trackArtist);
+        ul.appendChild(_trackTitle);
+        ul.appendChild(_user);
+    }
+
+    function getData() {
+        firebase.database.ref("song").once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                let user = childSnapshot.val().user;
+                let trackArtist = childSnapshot.val().trackArtist;
+                let trackTitle = childSnapshot.val().trackTitle;
+                addItemsToList(trackArtist,trackTitle,user);
+            }
+        
+        );
+        });
+    }
+        window.onload(getData());
         const user = auth.currentUser;
 
     logout.addEventListener('click', (e) => {
         signOut(auth).then(() => {
             alert("User logged out successfully");
-            window.location.href = "/login.html";
+            window.location.href = "./login.html";
         }).catch((error) => {
             alert('Error: ' + error.message);
         });
     });
   </script>
+
 </html>
